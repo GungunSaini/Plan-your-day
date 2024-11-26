@@ -94,4 +94,24 @@ hr {
     width: 200px;
     padding: 5px 0px;
 }
+
+@media(max-width: 430px){
+    .todo button {
+        padding: 10px 12px;
+        border-radius: 5px;
+        font-size: 12.5px;
+    }
+    .todo input[type="text"] {
+        width: 60%;
+        padding: 8.5px;
+        font-size: 0.88rem;
+    }
+
+    div .remove {
+        border-radius: 50px;
+        margin-left: 9rem;
+        font-size: 1rem;
+    }
+
+}
   
