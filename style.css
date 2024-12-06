@@ -1,56 +1,73 @@
+*{
+    box-sizing: border-box;
+    
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
-    margin: 0;
+    margin-top: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
   
 .todo {
     background: white;
-    padding: 20px;
+    padding: 0px 25px 0px 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 400px;
-    height: 90vh;
+    box-shadow: 1px 1px 5px rgb(5, 5, 42);
+    height: 95vh;
+    position: relative;
 }
   
 .todo h1 {
-    margin-bottom: 20px;
+    background-color: #f6c4ae;
+    border-radius: 10px;
+    padding: 15px;
     color: #4A90E2;
-    text-align: center;
+    display: flex;
+    justify-content: center
 }
-  
-.todo input[type="text"] {
+
+.input-btn{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.input-btn input[type="text"] {
     width: 70%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    outline: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
   
-.todo button {
-    padding: 10px 15px;
+.input-btn button {
+    width: 30%;
+    padding: 12px;
     background-color: #5cb85c;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    /* font-size: 0.7rem; */
+    margin-left: 5px;
 }
   
-.todo button:hover {
+.input-btn button:hover {
     background-color: #4cae4c;
 }
   
 .list {
     list-style: none;
     padding: 0;
-    margin-top: 20px;
+    margin-top: 15px;
 }
   
 .list li {
@@ -72,14 +89,16 @@ div .remove {
     background-color: #d9534f;
     color: white;
     border: none;
-    border-radius: 50%;
     cursor: pointer;
-    margin-left: 10.8rem;
+    padding: 12px 14px;
+    border-radius: 5px;
+    font-size: 0.9rem;
     position: absolute;
-    top: 650px;
+    bottom: 40px;
+    left: 100px;
 }
   
- div .remove:hover {
+div .remove:hover {
     background-color: #c9302c;
 }
   
@@ -87,15 +106,108 @@ hr {
     border: 1px solid #ddd;
 }
 
-#current-date {
-    font-size: 1rem;
-    color: black;
-    margin-bottom: 20px;
-    width: 200px;
-    padding: 5px 0px;
+
+.date-time {
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    padding: 0px 5px 15px 2px;
+    display: flex;
+    flex-direction: column;
 }
 
-@media(max-width: 430px){
+#current-date {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+  
+#time {
+    font-size: 1rem;
+    color: #494949;
+}
+  
+.clock{
+    height: 18px;
+    width: 18px;
+    margin: 5px 5px 0px 0px;
+}
+
+.calendar{
+    height: 20px;
+    width: 20px;
+}
+
+
+.date-dark-mode{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.switch{
+    opacity: 0;
+    position: absolute;
+}
+
+.switch + label {
+    height: 30px;
+    width: 56px;
+    border: 1px solid wheat;
+    border-radius: 50px;
+    padding: 4px;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+    position: relative;
+}
+
+.ball{
+    height: 24px;
+    width: 24px;
+    border: 1px solid whitesmoke;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    left: 3px;
+    bottom: 0.1rem;
+    transition: transform 0.2s linear ease-in-out;
+}
+
+.switch:checked + label .ball {
+    transform: translateX(24px);
+}
+
+.moon {
+    height: 1.2rem;
+}
+
+.sun{
+    height: 1.5rem;
+}
+
+.checkbox{
+    accent-color: blue;
+    height: 17px;
+    width: 17px;
+}
+
+.white{
+    color: white;
+}
+
+.dark{
+    background-color: rgb(26, 25, 28);
+} 
+
+
+
+
+/* @media(max-width: 430px){
     .todo button {
         padding: 10px 12px;
         border-radius: 5px;
@@ -113,5 +225,5 @@ hr {
         font-size: 1rem;
     }
 
-}
+} */
   

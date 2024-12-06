@@ -1,27 +1,80 @@
-let inp = document.querySelector("input");
-let btn = document.querySelector("button");
+let inp = document.querySelector("#task-input");
+let btn = document.querySelector("#add-task-btn");
 let ul = document.querySelector("ul");
+let theme = document.getElementById("switch");
+let time = document.getElementById("clock");
+let timeformat = document.getElementById("timeformat");
+
+
+// Save dark mode state
+theme.addEventListener("change", () => {
+    document.querySelector(".todo").classList.toggle("dark");
+    document.querySelector("#clock").classList.toggle("white");
+    document.querySelector("#timeformat").classList.toggle("white");
+    document.querySelector("#current-date").classList.toggle("white");
+
+    localStorage.setItem("darkMode", theme.checked);
+});
+
+
+
+// Apply dark mode on load
+window.addEventListener("load", () => {
+    let isDarkMode = JSON.parse(localStorage.getItem("darkMode"));
+    if (isDarkMode) {
+        document.body.classList.add("body-dark");
+        theme.checked = true;
+    }
+});
+
 
 
 // display the current date
 function displayCurrentDate() {
     let now = new Date();
-    let options = { year: "numeric", month: "long", day: "numeric" }; 
-    let formattedDate = now.toLocaleDateString(undefined, options);
+
+    let date = now.getDate();
+    let month = now.getMonth()+1;
+    let year = now.getFullYear();
+
+    date = date<10 ? `0${date}` : date;
+    month = month<10 ? `0${month}` : month; 
+
+    let formattedDate = `${date}-${month}-${year}`;
 
     let dateElement = document.getElementById("current-date");
-    dateElement.innerHTML = `<i class="fa-regular fa-calendar-days"></i>  ${formattedDate}`;
+    dateElement.innerHTML = ` <img src="assets/calendar.svg" class="calendar" > ${formattedDate}`;
 }
 
 displayCurrentDate();
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    setInterval(showTime , 1000)
+})
+
+let showTime = () => {
+    let date = new Date();
+
+    let hr = date.getHours();
+    let mins = date.getMinutes();
+    let secs = date.getSeconds();
+
+
+    hr = hr<10 ? `0${hr}` : hr;
+    mins = mins<10 ? `0${mins}` : mins;
+    secs = secs<10 ? `0${secs}` : secs;
+    
+    clock.innerHTML = ` <img src="assets/clock.svg" class="clock">${hr} : ${mins} : ${secs}`;
+    timeformat.innerText = hr>12 ? "pm" : "am";
+}
 
 
 
 // Create a Remove button
 let dlt = document.createElement("button");
-dlt.innerText = "X";
+dlt.innerHTML = '<i class="fa-solid fa-trash-can"></i>  Clear Completed';
 dlt.classList.add("remove");
-document.querySelector("div").append(dlt);
+document.querySelector(".todo").append(dlt);
 
 
 // Load tasks from localStorage on page load
@@ -38,7 +91,7 @@ btn.addEventListener("click", function () {
     let taskText = inp.value.trim();
     if (taskText === "") return; 
 
-    addTaskToDOM(taskText, false); // Add task to DOM
+    addTaskToDOM(taskText, false);
     inp.value = ""; 
 });
 
@@ -53,6 +106,7 @@ function addTaskToDOM(taskText, isChecked) {
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = isChecked;
+    checkbox.classList.add("checkbox");
 
 
     let hr = document.createElement("hr");
@@ -71,7 +125,7 @@ function addTaskToDOM(taskText, isChecked) {
         } else {
             task.style.textDecoration = "none";
         }
-        saveTasksToLocalStorage(); // Update tasks in localStorage
+        saveTasksToLocalStorage(); 
     });
 
 
@@ -79,7 +133,7 @@ function addTaskToDOM(taskText, isChecked) {
         task.style.textDecoration = "line-through";
     }
 
-    saveTasksToLocalStorage(); // Save tasks after adding
+    saveTasksToLocalStorage();
 }
 
 
@@ -93,7 +147,7 @@ dlt.addEventListener("click", () => {
             task.remove(); 
         }
     });
-    saveTasksToLocalStorage(); // Update localStorage after removal
+    saveTasksToLocalStorage();
 });
 
 
