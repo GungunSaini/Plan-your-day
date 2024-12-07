@@ -11,8 +11,6 @@ theme.addEventListener("change", () => {
     document.querySelector(".todo").classList.toggle("dark");
     document.querySelector("#clock").classList.toggle("white");
     document.querySelector("#timeformat").classList.toggle("white");
-    document.querySelector("#current-date").classList.toggle("white");
-
     localStorage.setItem("darkMode", theme.checked);
 });
 
